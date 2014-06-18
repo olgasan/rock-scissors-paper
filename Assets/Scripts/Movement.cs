@@ -11,5 +11,5 @@ public abstract class Movement
 			return CheckIfWins(movement);
 	}
 
-	public abstract RoundResult CheckIfWins(Movement movement);
+	protected abstract RoundResult CheckIfWins(Movement movement);
 }

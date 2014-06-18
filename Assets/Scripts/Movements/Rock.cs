@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Rock : Movement 
 {
-	public override RoundResult CheckIfWins (Movement movement)
+	protected override RoundResult CheckIfWins (Movement movement)
 	{
 		if (movement is Paper)
 			return RoundResult.BWins;

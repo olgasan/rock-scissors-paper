@@ -8,28 +8,22 @@ public class Game
 		private set;
 	}
 
-	public Player Player 
+	public MovementGenerator CPU 
 	{
 		get;
 		private set;
 	}
 
-	public CPUPlayer CPU 
+	public Game (IUI ui, MovementGenerator cpu)
 	{
-		get;
-		private set;
-	}
-
-	public Game (IUI ui)
-	{
+		RoundResult = RoundResult.Undefined;
 		ui.PlayerMovementSelected += OnPlayerMovementSelected;
-		Player = new Player ();
-		CPU = new CPUPlayer ();
+		CPU = cpu;
 	}
 
 	private void OnPlayerMovementSelected (Movement movementInstance)
 	{
-		Player.Movement = movementInstance;
-		CPU.SelectMovement ();
+		 Movement cpuMovement = CPU.GenerateMovement ();
+		RoundResult = movementInstance.GetResult (cpuMovement);
 	}
 }

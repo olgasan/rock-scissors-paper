@@ -21,26 +21,22 @@ namespace UnityTest
 
 		private Game game;
 		private MyUITest ui;
+		private MovementGenerator cpu;
 
 		[SetUp]
 		public void SetUp ()
 		{
 			ui = new MyUITest();
-			game = new Game (ui);
+			cpu = new MovementGenerator ();
+			game = new Game (ui, cpu);
 		}
 
 		[Test]
-		public void ListenPlayerMovements ()
+		public void ResultsExistsAfterPlayerSelectsMovement ()
 		{
 			ui.Selected (new Scissors ());
-			Assert.IsInstanceOf <Scissors> (game.Player.Movement);
+			Assert.AreNotEqual (RoundResult.Undefined, game.RoundResult);
 		}
 
-		[Test]
-		public void CPUSelectsAfterPlayerMovement ()
-		{
-			ui.Selected (new Scissors ());
-			Assert.IsNotNull (game.CPU.Movement);
-		}
 	}
 }

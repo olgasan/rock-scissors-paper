@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CPUPlayer : Player
+public class MovementGenerator
 {
 	private List<Movement> availableMovements;
 
-	public CPUPlayer ()
+	public MovementGenerator ()
 	{
 		availableMovements = new List<Movement> () {
 			new Rock (),
@@ -15,9 +15,9 @@ public class CPUPlayer : Player
 		};
 	}
 
-	public void SelectMovement ()
+	public Movement GenerateMovement ()
 	{
 		int random = Random.Range (0, availableMovements.Count-1);
-		Movement = availableMovements[random];
+		return availableMovements[random];
 	}
 }
