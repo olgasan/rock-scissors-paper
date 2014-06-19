@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class UI : IUI 
+public class UI : UIEventDispatcher 
 {
 	public event System.Action<Movement> PlayerMovementSelected;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public interface IUI
+public interface UIEventDispatcher
 {
 	event System.Action<Movement> PlayerMovementSelected;
 }

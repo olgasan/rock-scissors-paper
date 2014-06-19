@@ -8,7 +8,7 @@ namespace UnityTest
 	[TestFixture]
 	internal class GameTest
 	{
-		internal class MyUITest : IUI 
+		internal class MyUITest : UIEventDispatcher 
 		{
 			public event System.Action<Movement> PlayerMovementSelected;
 			

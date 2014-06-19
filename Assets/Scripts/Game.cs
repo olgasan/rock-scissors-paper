@@ -16,7 +16,7 @@ public class Game
 		private set;
 	}
 
-	public Game (IUI ui, MovementGenerator cpu)
+	public Game (UIEventDispatcher ui, MovementGenerator cpu)
 	{
 		ui.PlayerMovementSelected += OnPlayerMovementSelected;
 		movementGenerator = cpu;
