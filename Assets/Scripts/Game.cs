@@ -2,13 +2,15 @@
 
 public class Game  
 {
-	public RoundResult RoundResult 
+	private MovementGenerator movementGenerator;
+
+	public int PlayerScore 
 	{
 		get;
 		private set;
 	}
 
-	public MovementGenerator CPU 
+	public int CPUScore 
 	{
 		get;
 		private set;
@@ -16,14 +18,23 @@ public class Game
 
 	public Game (IUI ui, MovementGenerator cpu)
 	{
-		RoundResult = RoundResult.Undefined;
 		ui.PlayerMovementSelected += OnPlayerMovementSelected;
-		CPU = cpu;
+		movementGenerator = cpu;
 	}
 
 	private void OnPlayerMovementSelected (Movement movementInstance)
 	{
-		 Movement cpuMovement = CPU.GenerateMovement ();
-		RoundResult = movementInstance.GetResult (cpuMovement);
+		Movement cpuMovement = movementGenerator.GenerateMovement ();
+		RoundResult result = movementInstance.GetResult (cpuMovement);
+
+		UpdateScore (result);
+	}
+
+	private void UpdateScore (RoundResult result)
+	{
+		if (result == RoundResult.AWins)
+			PlayerScore++;
+		else if (result == RoundResult.BWins)
+			CPUScore++;
 	}
 }

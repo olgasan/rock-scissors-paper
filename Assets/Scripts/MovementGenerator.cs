@@ -15,7 +15,7 @@ public class MovementGenerator
 		};
 	}
 
-	public Movement GenerateMovement ()
+	public virtual Movement GenerateMovement ()
 	{
 		int random = Random.Range (0, availableMovements.Count-1);
 		return availableMovements[random];
