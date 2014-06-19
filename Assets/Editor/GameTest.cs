@@ -8,7 +8,7 @@ namespace UnityTest
 	[TestFixture]
 	internal class GameTest
 	{
-		internal class MyUITest : UIEventDispatcher 
+		internal class MyUITest : IUIEventDispatcher 
 		{
 			public event System.Action<Movement> PlayerMovementSelected;
 			
@@ -22,14 +22,18 @@ namespace UnityTest
 		private Game game;
 		private MyUITest ui;
 		private MovementGenerator cpu;
+		private ScoreDisplayer displayer;
 
 		[SetUp]
 		public void SetUp ()
 		{
 			ui = new MyUITest();
+			displayer = Substitute.For <ScoreDisplayer> ();
+
 			cpu = Substitute.For <MovementGenerator> ();
 			cpu.GenerateMovement ().Returns (new Rock ());
-			game = new Game (ui, cpu);
+
+			game = new Game (ui, displayer, cpu);
 		}
 
 		[Test]
@@ -67,6 +71,24 @@ namespace UnityTest
 			
 			Assert.AreEqual (0, game.PlayerScore);
 			Assert.AreEqual (0, game.CPUScore);
+		}
+
+		[Test]
+		public void CallUIDisplayerWhenPlayerWinsRound ()
+		{
+			cpu.GenerateMovement ().Returns (new Paper ());
+			ui.Selected (new Scissors ());
+
+			displayer.Received().UpdatePlayerScore (1);
+		}
+
+		[Test]
+		public void CallUIDisplayerWhenCPUWinsRound ()
+		{
+			cpu.GenerateMovement ().Returns (new Scissors ());
+			ui.Selected (new Paper ());
+			
+			displayer.Received().UpdateCPUScore (1);
 		}
 	}
 }

@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class UIObject : MonoBehaviour 
 {
-	private UI ui;
+	private UIEventDispatcher ui;
 	private OnScreenDebugMenu menu;
 
 	private void Awake ()
 	{
 		menu = new OnScreenDebugMenu ();
-		ui = new UI ();
+		ui = new UIEventDispatcher ();
 	}
 
 	private void OnGUI ()

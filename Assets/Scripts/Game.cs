@@ -3,6 +3,7 @@
 public class Game  
 {
 	private MovementGenerator movementGenerator;
+	private ScoreDisplayer displayer;
 
 	public int PlayerScore 
 	{
@@ -16,10 +17,11 @@ public class Game
 		private set;
 	}
 
-	public Game (UIEventDispatcher ui, MovementGenerator cpu)
+	public Game (IUIEventDispatcher ui, ScoreDisplayer displayer, MovementGenerator cpu)
 	{
 		ui.PlayerMovementSelected += OnPlayerMovementSelected;
 		movementGenerator = cpu;
+		this.displayer = displayer;
 	}
 
 	private void OnPlayerMovementSelected (Movement movementInstance)
@@ -33,8 +35,14 @@ public class Game
 	private void UpdateScore (RoundResult result)
 	{
 		if (result == RoundResult.AWins)
+		{
 			PlayerScore++;
+			displayer.UpdatePlayerScore (PlayerScore);
+		}
 		else if (result == RoundResult.BWins)
+		{
 			CPUScore++;
+			displayer.UpdateCPUScore (CPUScore);
+		}
 	}
 }

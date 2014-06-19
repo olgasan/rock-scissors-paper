@@ -6,14 +6,14 @@ namespace UnityTest
 	[TestFixture]
 	internal class UITest
 	{
-		private UI ui;
+		private UIEventDispatcher ui;
 		private int eventCount;
 
 		[SetUp]
 		public void SetUp ()
 		{
 			eventCount = 0;
-			ui = new UI ();
+			ui = new UIEventDispatcher ();
 			ui.PlayerMovementSelected += OnPlayerMovementSelected;
 		}
 
