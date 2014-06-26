@@ -6,6 +6,7 @@ namespace UnityTest
 	[TestFixture]
 	internal class UITest
 	{
+		// test comment
 		private UIEventDispatcher ui;
 		private int eventCount;
 
